@@ -1,55 +1,34 @@
 import 'package:flutter/material.dart';
 
 class TodoListPage extends StatelessWidget {
-  TodoListPage({super.key});
-
-  final TextEditingController emailController = TextEditingController();
+  const TodoListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Row(
             children: [
-              TextField(
-                /* hintText: 'exemplo@email.com',
-                  border: InputBorder.none,//OutlineInputBorder(),
-                  errorText: 'Campo obrigatório'
+              Expanded(
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Adicione uma tarefa',
+                    hintText: 'Ex. Estudar Flutter',
+                  ),
                 ),
-                obscureText: true,
-                */
-                controller: emailController,
-                decoration: const InputDecoration(
-                  labelText: 'E-mail',
-                ),
-                onChanged: onChanged,   // ver qualquer mudança no campo de texto
-                onSubmitted: onSubmitted, // bom para desenvolvimento web, quando aperta enter entra o valor no campo
               ),
+              SizedBox(width: 8),
               ElevatedButton(
-                onPressed: login,
-                child: Text('Entrar'),
-              ),
+                onPressed: (){},
+                child: Text('+'),
+              )
             ],
           ),
         ),
       ),
     );
   }
-
-  void login() {
-    String text = emailController.text;
-    print(text);
-  }
-
-  void onChanged(String text) {
-    print(text);
-  }
-
-  void onSubmitted(String text) {
-    print(text);
-  }
-
 }
