@@ -53,20 +53,20 @@ class TodoListPage extends StatelessWidget {
               SizedBox(
                 height: 16,
               ),
-              ListView(
+              ListView(           //aceita qualquer widget dentro
                 shrinkWrap: true, //deixa a lista o mais enxuta o possivel(espaçamento)
                 children: [
-                  Container(
-                    color: Colors.blue,
-                    height: 50,
+                  ListTile(
+                    title: Text('Tarefa 1'),
+                    subtitle: Text('20/11/2023'),
+                    leading: Icon(Icons.save),
+                    onTap: () => print('tap1') ,
                   ),
-                  Container(
-                    color: Colors.yellow,
-                    height: 50,
-                  ),
-                  Container(
-                    color: Colors.green,
-                    height: 50,
+                  ListTile(
+                    title: Text('Tarefa 2'),
+                    subtitle: Text('21/11/2023'),
+                    leading: Icon(Icons.telegram),
+                    onTap: () => print('tap2') ,
                   ),
                 ],
               ),
