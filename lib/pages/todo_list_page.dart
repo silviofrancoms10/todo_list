@@ -50,7 +50,29 @@ class TodoListPage extends StatelessWidget {
                       )
                 ],
               ),
-              SizedBox(height: 16 ,),
+              SizedBox(
+                height: 16,
+              ),
+              ListView(
+                shrinkWrap: true, //deixa a lista o mais enxuta o possivel(espaçamento)
+                children: [
+                  Container(
+                    color: Colors.blue,
+                    height: 50,
+                  ),
+                  Container(
+                    color: Colors.yellow,
+                    height: 50,
+                  ),
+                  Container(
+                    color: Colors.green,
+                    height: 50,
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 16,
+              ),
               Row(
                 children: [
                   Expanded(
@@ -58,7 +80,9 @@ class TodoListPage extends StatelessWidget {
                       'Você possui 0 tarefas pendentes',
                     ),
                   ),
-                  SizedBox(width: 8,),
+                  SizedBox(
+                    width: 8,
+                  ),
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
