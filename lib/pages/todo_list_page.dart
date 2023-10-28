@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
-class TodoListPage extends StatelessWidget {
-  const TodoListPage({super.key});
+class TodoListPage extends StatefulWidget {
+   TodoListPage({super.key});
+
+  @override
+  State<TodoListPage> createState() => _TodoListPageState();
+}
+
+class _TodoListPageState extends State<TodoListPage> {
+  final TextEditingController todoController = TextEditingController();
+
+  List<String> todos = [];
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +25,7 @@ class TodoListPage extends StatelessWidget {
                 children: [
                   Expanded(
                     child: TextField(
+                      controller: todoController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Adicione uma tarefa',
@@ -25,7 +35,13 @@ class TodoListPage extends StatelessWidget {
                   ),
                   SizedBox(width: 8),
                   ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        String text = todoController.text;
+                        setState(() {
+                          todos.add(text);
+                        });
+                        todoController.clear();
+                      },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Color(0xffA435F0),
                           padding: EdgeInsets.all(14), // EdgeInsets.zero,
@@ -53,22 +69,17 @@ class TodoListPage extends StatelessWidget {
               SizedBox(
                 height: 16,
               ),
-              ListView(           //aceita qualquer widget dentro
-                shrinkWrap: true, //deixa a lista o mais enxuta o possivel(espaçamento)
-                children: [
-                  ListTile(
-                    title: Text('Tarefa 1'),
-                    subtitle: Text('20/11/2023'),
-                    leading: Icon(Icons.save),
-                    onTap: () => print('tap1') ,
-                  ),
-                  ListTile(
-                    title: Text('Tarefa 2'),
-                    subtitle: Text('21/11/2023'),
-                    leading: Icon(Icons.telegram),
-                    onTap: () => print('tap2') ,
-                  ),
-                ],
+              Flexible( //flexivel para que a lista nao fique cortada, permite scroll na lista
+                child: ListView(           //aceita qualquer widget dentro
+                  shrinkWrap: true, //deixa a lista o mais enxuta o possivel(espaçamento)
+                  children: [
+                    for(String todo in todos)
+                    ListTile(
+                      title: Text(todo),
+                      onTap: () => print('tarefa: $todo') ,
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 height: 16,
