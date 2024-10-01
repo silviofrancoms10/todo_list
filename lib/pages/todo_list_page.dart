@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class TodoListPage extends StatelessWidget {
@@ -23,7 +25,27 @@ class TodoListPage extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 8),
-              ElevatedButton(onPressed: () {}, child: Text("+"))
+              ElevatedButton(
+                onPressed: () {},
+                /*child: Text(
+                  "+",
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),*/
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8)),
+                  backgroundColor: Color(0xff00d7f3),
+                  foregroundColor: Colors.white,
+                  padding: EdgeInsets.all(12),
+                ),
+                child: Icon(
+                  Icons.add,
+                  size: 30,
+                ),
+              )
             ],
           ),
         ),
