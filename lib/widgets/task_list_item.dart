@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
 class TaskListItem extends StatelessWidget {
-  const TaskListItem({super.key});
+  const TaskListItem({super.key, required this.title});
+
+  final String title;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(vertical: 2),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(4),
         color: Colors.grey[200],
@@ -21,7 +24,7 @@ class TaskListItem extends StatelessWidget {
             ),
           ),
           Text(
-            "Tarefa123",
+            title,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
