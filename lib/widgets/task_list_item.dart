@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:todo_list/models/task.dart';
 
 class TaskListItem extends StatelessWidget {
-  const TaskListItem({super.key, required this.title});
+  const TaskListItem({super.key, required this.task});
 
-  final String title;
+  final Task task;
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +20,13 @@ class TaskListItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "05/10/2024",
+            DateFormat('dd/MM/yyyy - HH:mm').format(task.dateTime),
             style: TextStyle(
               fontSize: 12,
             ),
           ),
           Text(
-            title,
+            task.title,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,

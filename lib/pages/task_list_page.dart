@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:todo_list/models/task.dart';
 import 'package:todo_list/widgets/task_list_item.dart';
 
 class TaskListPage extends StatefulWidget {
@@ -13,7 +14,7 @@ class TaskListPage extends StatefulWidget {
 class _TaskListPageState extends State<TaskListPage> {
   final TextEditingController taskController = TextEditingController();
 
-  List<String> tasks = [];
+  List<Task> tasks = [];
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +42,11 @@ class _TaskListPageState extends State<TaskListPage> {
                     ElevatedButton(
                       onPressed: () {
                         setState(() {
-                          tasks.add(taskController.text);
+                          Task task = Task(
+                            title: taskController.text,
+                            dateTime: DateTime.now(),
+                          );
+                          tasks.add(task);
                           taskController.clear();
                         });
                       },
@@ -73,8 +78,10 @@ class _TaskListPageState extends State<TaskListPage> {
                   child: ListView(
                     shrinkWrap: true,
                     children: [
-                      for (String task in tasks)
-                        TaskListItem(title: task),
+                      for (Task task in tasks)
+                        TaskListItem(
+                          task: task,
+                        ),
                     ],
                   ),
                 ),
