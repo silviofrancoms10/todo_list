@@ -79,6 +79,7 @@ class _TaskListPageState extends State<TaskListPage> {
                       for (Task task in tasks)
                         TaskListItem(
                           task: task,
+                          onDelete: onDelete,
                         ),
                     ],
                   ),
@@ -117,11 +118,9 @@ class _TaskListPageState extends State<TaskListPage> {
     );
   }
 
-  void onChanged(String value) {
-    // print(value);
-  }
-
-  void onSubmitted(String value) {
-    print(value);
+  void onDelete(Task task) {
+    setState(() {
+      tasks.remove(task);
+    });
   }
 }
