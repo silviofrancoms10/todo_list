@@ -14,6 +14,9 @@ class _TaskListPageState extends State<TaskListPage> {
 
   List<Task> tasks = [];
 
+  Task? deletedTask;
+  int? deletedTaskIndex;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -119,8 +122,33 @@ class _TaskListPageState extends State<TaskListPage> {
   }
 
   void onDelete(Task task) {
+    deletedTask = task;
+    deletedTaskIndex = tasks.indexOf(task);
     setState(() {
       tasks.remove(task);
     });
+
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          "Tarefa ${task.title} deletada com sucesso!",
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: Color(0xffff0000),
+        action: SnackBarAction(
+          label: 'Desfazer',
+          textColor: const Color(0xff00d7f3),
+          onPressed: () {
+            setState(() {
+              tasks.insert(deletedTaskIndex!, deletedTask!);
+            });
+          },
+        ),
+        duration: const Duration(seconds: 5),
+      ),
+    );
   }
 }
