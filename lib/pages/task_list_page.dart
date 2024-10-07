@@ -101,8 +101,10 @@ class _TaskListPageState extends State<TaskListPage> {
                       width: 8,
                     ),
                     ElevatedButton(
-                      onPressed: () {},
                       child: Text("Limpar tudo"),
+                      onPressed: () {
+                        showDeleteTasksConfirmationDialog();
+                      },
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
@@ -150,5 +152,39 @@ class _TaskListPageState extends State<TaskListPage> {
         duration: const Duration(seconds: 5),
       ),
     );
+  }
+
+  void showDeleteTasksConfirmationDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("Deseja limpar tudo?"),
+        content:
+            Text("Você tem certeza de que deseja apagar todas as tarefas?"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            style: TextButton.styleFrom(foregroundColor: Color(0xff00d7f3)),
+            child: Text("Cancelar"),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              deleteAllTasks();
+            },
+            style: TextButton.styleFrom(foregroundColor: Colors.red),
+
+            child: Text("Limpar tudo"),
+          ),
+        ],
+      ),
+    );
+  }
+  void deleteAllTasks() {
+    setState(() {
+      tasks.clear();
+    });
   }
 }
