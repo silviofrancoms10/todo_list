@@ -38,6 +38,8 @@ dependencies:
   intl:
   flutter_slidable: ^3.1.2
   shared_preferences: ^2.3.5
+  flutter_slidable:
+  shared_preferences: ^2.3.2
 
 dev_dependencies:
   flutter_test:
