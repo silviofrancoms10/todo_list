@@ -17,7 +17,7 @@ class TaskListItem extends StatelessWidget {
         endActionPane: ActionPane(
           // A motion is a widget used to control how the pane animates.
           motion: const DrawerMotion(),
-          extentRatio: 0.4,
+          extentRatio: 0.18,
           children: [
             CustomSlidableAction(
               onPressed: (context) {
@@ -34,22 +34,6 @@ class TaskListItem extends StatelessWidget {
                     size: 32,
                   ),
                   Text('Deletar'),
-                ],
-              ),
-            ),
-            CustomSlidableAction(
-              onPressed: (context) {},
-              backgroundColor: Color(0xff00d7f3),
-              foregroundColor: Colors.white,
-              padding: EdgeInsets.zero,
-              child: const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.edit, color: Colors.white ,
-                    size: 32,
-                  ),
-                  Text('Editar'),
                 ],
               ),
             ),
