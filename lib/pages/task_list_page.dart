@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list/models/task.dart';
+import 'package:todo_list/repositories/task_repository.dart';
 import 'package:todo_list/widgets/task_list_item.dart';
 
 class TaskListPage extends StatefulWidget {
@@ -11,6 +12,7 @@ class TaskListPage extends StatefulWidget {
 
 class _TaskListPageState extends State<TaskListPage> {
   final TextEditingController taskController = TextEditingController();
+  final TaskRepository taskRepository = TaskRepository();
 
   List<Task> tasks = [];
 
@@ -49,6 +51,7 @@ class _TaskListPageState extends State<TaskListPage> {
                           );
                           tasks.add(task);
                           taskController.clear();
+                          taskRepository.saveTaskList(tasks);
                         });
                       },
                       /*child: Text(
