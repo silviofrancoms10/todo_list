@@ -60,6 +60,7 @@ class _TaskListPageState extends State<TaskListPage> {
                             borderRadius: BorderRadius.circular(8)),
                         backgroundColor: Color(0xff00d7f3),
                         foregroundColor: Colors.white,
+                        iconColor: Colors.white,
                         padding: EdgeInsets.all(12),
                       ),
                       child: const Icon(
@@ -79,6 +80,7 @@ class _TaskListPageState extends State<TaskListPage> {
                       for (Task task in tasks)
                         TaskListItem(
                           task: task,
+                          onDelete: onDelete,
                         ),
                     ],
                   ),
@@ -117,11 +119,9 @@ class _TaskListPageState extends State<TaskListPage> {
     );
   }
 
-  void onChanged(String value) {
-    // print(value);
-  }
-
-  void onSubmitted(String value) {
-    print(value);
+  void onDelete(Task task) {
+    setState(() {
+      tasks.remove(task);
+    });
   }
 }
