@@ -4,6 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:todo_list/models/task.dart';
 
 class TaskListItem extends StatelessWidget {
+  const TaskListItem({super.key, required this.task, required this.onDelete});
+
   const TaskListItem({
     super.key,
     required this.task,
@@ -16,6 +18,32 @@ class TaskListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 2.0),
+      child: Slidable(
+        endActionPane: ActionPane(
+          // A motion is a widget used to control how the pane animates.
+          motion: const DrawerMotion(),
+          extentRatio: 0.18,
+          children: [
+            CustomSlidableAction(
+              onPressed: (context) {
+                onDelete(task);
+              },
+              backgroundColor: const Color(0xFFFE4A49),
+              foregroundColor: Colors.white,
+              padding: EdgeInsets.zero,
+              child: const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.delete, color: Colors.white ,
+                    size: 32,
+                  ),
+                  Text('Deletar'),
+                ],
+              ),
+            ),
+
       padding: const EdgeInsets.symmetric(vertical: 2),
       child: Slidable(
         endActionPane: ActionPane(
@@ -44,6 +72,27 @@ class TaskListItem extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(4),
             color: Colors.grey[200],
+          ),
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                DateFormat('dd/MM/yyyy - HH:mm').format(task.dateTime),
+                style: TextStyle(
+                  fontSize: 12,
+                ),
+              ),
+              Text(
+                task.title,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+
           ),
           padding: const EdgeInsets.all(16),
           child: Column(
