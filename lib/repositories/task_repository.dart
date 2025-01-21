@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo_list/models/task.dart';
 
 class TaskRepository {
 
@@ -8,4 +11,9 @@ class TaskRepository {
   }
 
   late SharedPreferences sharedPreferences;
+
+  void saveTaskList(List<Task> tasks){
+    final jsonString = json.encode(tasks);
+    sharedPreferences.setString('task_list', jsonString);
+  }
 }
