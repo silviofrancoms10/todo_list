@@ -19,6 +19,8 @@ class _TaskListPageState extends State<TaskListPage> {
   Task? deletedTask;
   int? deletedTaskIndex;
 
+  String? errorText;
+
   @override
   void initState() {
     super.initState();
@@ -49,18 +51,35 @@ class _TaskListPageState extends State<TaskListPage> {
                           border: OutlineInputBorder(),
                           labelText: 'Adicione uma tarefa',
                           hintText: 'Ex. Estudar Flutter',
+                          errorText: errorText,
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 2,
+                              color: Color(0xff00d7f3),
+                            ),
+                          ),
+                          labelStyle: TextStyle(
+                            color: Color(0xff00d7f3),
+                          )
                         ),
                       ),
                     ),
                     SizedBox(width: 8),
                     ElevatedButton(
                       onPressed: () {
+                        if (taskController.text.isEmpty) {
+                          setState(() {
+                          errorText = 'O título da tarefa não pode ser vazio';
+                          });
+                          return;
+                        }
                         setState(() {
                           Task task = Task(
                             title: taskController.text,
                             dateTime: DateTime.now(),
                           );
                           tasks.add(task);
+                          errorText = null;
                           taskController.clear();
                           taskRepository.saveTaskList(tasks);
                         });
