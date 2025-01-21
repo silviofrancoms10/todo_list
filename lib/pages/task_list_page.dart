@@ -20,6 +20,17 @@ class _TaskListPageState extends State<TaskListPage> {
   int? deletedTaskIndex;
 
   @override
+  void initState() {
+    super.initState();
+
+    taskRepository.getTaskList().then((value) {
+      setState(() {
+        tasks = value;
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -132,6 +143,7 @@ class _TaskListPageState extends State<TaskListPage> {
     setState(() {
       tasks.remove(task);
     });
+    taskRepository.saveTaskList(tasks);
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(
@@ -146,6 +158,7 @@ class _TaskListPageState extends State<TaskListPage> {
           setState(() {
             tasks.insert(deletedTaskIndex!, deletedTask!);
           });
+          taskRepository.saveTaskList(tasks);
         },
       ),
       duration: Duration(seconds: 5),
@@ -186,5 +199,6 @@ class _TaskListPageState extends State<TaskListPage> {
     setState(() {
       tasks.clear();
     });
+    taskRepository.saveTaskList(tasks);
   }
 }
